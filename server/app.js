@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import morgan from 'morgan';
 import config from './config'
+import userRoutes from './routes/api/user'
 import postRoutes from './routes/api/post'
 import hpp from "hpp";
 import helmet from "helmet";
@@ -22,6 +23,7 @@ mongoose
 .connect(MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
     })
     .then(()=>console.log("MongoDB connecting Success"))
     .catch((e) => console.log(e));
@@ -29,5 +31,6 @@ mongoose
 //Use routes
 app.get('/');
 app.use('/api/post',postRoutes)
+app.use('/api/user',userRoutes)
 
 export default app;
