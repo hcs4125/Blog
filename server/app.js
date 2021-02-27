@@ -2,11 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import morgan from 'morgan';
 import config from './config'
-import userRoutes from './routes/api/user'
-import postRoutes from './routes/api/post'
 import hpp from "hpp";
 import helmet from "helmet";
 import cors from "cors";
+
+import userRoutes from './routes/api/user'
+import postRoutes from './routes/api/post'
+import authRoutes from './routes/api/auth'
 
 const app = express();
 const {MONGO_URI} = config;
@@ -32,5 +34,7 @@ mongoose
 app.get('/');
 app.use('/api/post',postRoutes)
 app.use('/api/user',userRoutes)
+app.use('/api/auth',authRoutes)
+
 
 export default app;
